@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<body style="background-image:url(../../Content/images/jumbotron.jpg); background-size:cover">
+    <div class="jumbotron">
+        <div class="text-center">
+            <div class="row" style="margin-top:3em;">
+                @using (Html.BeginForm("Listing", "Property", FormMethod.Get))
+                {
+                    <div class="form-group">
+                        @Html.TextBox("search", "", new { @class = "input-lg" })
+                        <input type="submit" value="Search Properties" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+            <div class="row" style="margin-top:2em; color:white;"><p>What are you interested in?</p></div>
+            <div class="row">
+                @Html.ActionLink("Buy/Rent", "Listing", "Property", null, new { @class = "btn btn-primary btn-lg" })
+                @Html.ActionLink("Invest", "Index", "Statistic", null, new { @class = "btn btn-primary btn-lg" })
+            </div>
+        </div>
+    </div>
+</body>

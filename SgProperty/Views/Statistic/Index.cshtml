@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SgProperty.Models.Dropdownlist>
+@using SgProperty.Models;
+
+<h2>Property Statistics</h2>
+
+
+@using (Html.BeginForm("Index", "Statistic", FormMethod.Post, new { style = "display:inline-block;margin-top:5px;" }))
+{
+    foreach (Dropdownlist dropdownlist in Model)
+    {
+        <div class="container" style="display:inline-block;">
+            @Html.Label(dropdownlist.listLabel)
+            @Html.DropDownList(dropdownlist.listName, dropdownlist.listOptions, new { style = "dropdown-menu", onchange = "this.form.submit();" })
+        </div>
+    }
+}
+
+<table class="table">
+    
+    <tr>
+        <td align="center">
+       
+                <img src="@Url.Action("Graph", new {type = @ViewBag.StatisticSelection })" />
+            
+        </td>
+    </tr>
+
+
+</table>

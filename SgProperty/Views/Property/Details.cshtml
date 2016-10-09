@@ -1,0 +1,194 @@
+﻿@model SgProperty.Models.Property
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<h4>Property</h4>
+@Scripts.Render("~/bundles/jquery")
+<table class="table">
+    <tr>
+        <td>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+
+                <dd>
+                    <img src="@Model.Image" alt="" height="200" width="200" />
+                    @*@Html.DisplayFor(model => model.Image)*@
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PropertyName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PropertyName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PropertyType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PropertyType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AskingPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AskingPrice)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AgreedPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AgreedPrice)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ListingType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ListingType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Size)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Size)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CountClicked)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CountClicked)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EstateID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EstateID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EstateName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EstateName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DistrictID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DistrictID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DistrictName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DistrictName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AgentID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AgentID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CompanyName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DatePosted)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DatePosted)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExclusiveStartDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ExclusiveStartDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExpiryDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ExpiryDate)
+                </dd>
+
+            </dl>
+
+        </td>
+
+        <td>
+            <div id="googleMap" style="width:500px;height:380px;" class="pull-right"></div>
+        </td>
+
+    </tr>
+
+</table>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+<script>var lat = '@Model.Latitude'; var long = '@Model.Longitude'; var propertyname = '@Model.PropertyName'; var addr = '@Model.Address';</script>
+@Scripts.Render("~/Scripts/googlemap.js")
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

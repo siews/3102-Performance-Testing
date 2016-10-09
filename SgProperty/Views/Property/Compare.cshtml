@@ -1,0 +1,107 @@
+﻿@model IList<SgProperty.Models.Property>
+
+
+@{
+    ViewBag.Title = "Compare";
+}
+
+<h2>Compare</h2>
+@Scripts.Render("~/bundles/jquery")
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-4"></div>
+    @foreach (var obj in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            @if (!String.IsNullOrWhiteSpace(obj.Image))
+            {
+                <img src="@obj.Image" width="160" height="160" align="middle" class="center-block" />
+
+            }
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-4"></div>
+    <div class="col-lg-4 col-md-4 col-xs-4">
+        <p style="background-color:yellow;"><b>Property1</b></p>
+        <p>$@ViewBag.property1Perunit/psf
+        
+            @{
+                if (ViewBag.property1Perunit > ViewBag.property2Perunit)
+                {
+                    <img src="@Url.Content("~/Content/images/uparrow.png")" width="25" height="25" />
+                }
+                else
+                {
+                    <img src="@Url.Content("~/Content/images/downarrow.png")" width="25" height="25" />
+                }
+            } 
+        </p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-4">
+        <p style="background-color:yellow; align-content:center"><b>Property2</b></p>
+        <p>$@ViewBag.property2Perunit/psf
+        
+            @{
+                if (ViewBag.property1Perunit < ViewBag.property2Perunit)
+                {
+                    <img src="@Url.Content("~/Content/images/uparrow.png")" width="25" height="25" />
+                }
+                else if (ViewBag.property1Perunit > ViewBag.property2Perunit)
+                {
+                    <img src="@Url.Content("~/Content/images/downarrow.png")" width="25" height="25" />
+                }
+            }
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-xs-4" style="font-weight:bold">
+        <p style="background-color:orange">Property Name</p>
+        <p>Address</p>
+        <p style="background-color:orange">HousingType</p>
+        <p>AskingPrice</p>
+        <p style="background-color:orange">Size</p>
+        <p>Listing Type</p>
+        <p style="background-color:orange">Latitude</p>
+        <p>Longtitude</p>
+        <p style="background-color:orange">Estate Name</p>
+        <p>Region Name</p>
+        <p style="background-color:orange">Number of Clicks</p>
+        <p>Agent Company Name</p>
+        <p style="background-color:orange">Date posted</p>
+        <p>Property Image</p>
+    </div>
+
+    @foreach (var obj in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            <p>@obj.PropertyName</p>
+            <p>@obj.Address</p>
+            <p>@obj.PropertyType</p>
+            <p>@obj.AskingPrice</p>
+            <p>@obj.Size</p>
+            <p>@obj.ListingType</p>
+            <p>@obj.Latitude</p>
+            <p>@obj.Longitude</p>
+            <p>@obj.EstateName</p>
+            <p>@obj.DistrictName</p>
+            <p>@obj.CountClicked</p>
+            <p>@obj.CompanyName</p>
+            <p>@obj.DatePosted</p>
+        </div>
+    }
+</div>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+@Scripts.Render("~/Scripts/googlemap.js");
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
