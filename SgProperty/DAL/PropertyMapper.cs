@@ -16,34 +16,34 @@ namespace SgProperty.DAL
         {
             string query =
                 "SELECT J3.PropertyID, J3.PropertyName, J3.Address, J3.PropertyType, J3.AskingPrice, J3.AgreedPrice, J3.Image, " +
-                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.EstateID, J3.EstateName, J3.DistrictID, D.DistrictName, " +
+                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.fEstateID as EstateID, J3.EstateName, J3.fDistrictID as DistrictID, D.DistrictName, " +
                 "J3.AgentID, J3.CompanyName, J3.DatePosted, J3.ExclusiveStartDate, J3.ExpiryDate " +
-                "FROM (SELECT J2.*, E.EstateName, E.DistrictID " +
+                "FROM (SELECT J2.*, E.EstateName, E.fDistrictID " +
                       "FROM (SELECT J1.*, A.CompanyName " +
-                             "FROM (SELECT P.*, AMP.AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
-                                    "FROM Property P " +
-                                    "LEFT JOIN Agent_Manages_Property AMP ON AMP.PropertyID = P.PropertyID) as J1 " +
-                             "LEFT JOIN Agent A ON A.AgentID = J1.fAgentID) as J2 " +
-                      "LEFT JOIN Estates E ON E.EstateID = J2.fEstateID) as J3 " +
-                "LEFT JOIN District D ON D.DistrictID = J3.fDistrictID";
+                             "FROM (SELECT P.*, AMP.fAgentID as AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
+                                    "FROM properties P " +
+                                    "LEFT JOIN agent_manages_property AMP ON AMP.fPropertyID = P.PropertyID) as J1 " +
+                             "LEFT JOIN agents A ON A.AgentID = J1.fAgentID) as J2 " +
+                      "LEFT JOIN estates E ON E.EstateID = J2.fEstateID) as J3 " +
+                "LEFT JOIN districts D ON D.DistrictID = J3.fDistrictID";
 
             return db.Database.SqlQuery<Property>(query).ToList();
         }
 
         public Property SelectPropertyById(int? id)
         {
-            string query = 
+            string query =
                 "SELECT J3.PropertyID, J3.PropertyName, J3.Address, J3.PropertyType, J3.AskingPrice, J3.AgreedPrice, J3.Image, " +
-                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.EstateID, J3.EstateName, J3.DistrictID, D.DistrictName, " +
+                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.fEstateID as EstateID, J3.EstateName, J3.fDistrictID as DistrictID, D.DistrictName, " +
                 "J3.AgentID, J3.CompanyName, J3.DatePosted, J3.ExclusiveStartDate, J3.ExpiryDate " +
-                "FROM (SELECT J2.*, E.EstateName, E.DistrictID " +
+                "FROM (SELECT J2.*, E.EstateName, E.fDistrictID " +
                       "FROM (SELECT J1.*, A.CompanyName " +
-                             "FROM (SELECT P.*, AMP.AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
-                                    "FROM Property P " +
-                                    "LEFT JOIN Agent_Manages_Property AMP ON AMP.PropertyID = P.PropertyID) as J1 " +
-                             "LEFT JOIN Agent A ON A.AgentID = J1.AgentID) as J2 " +
-                      "LEFT JOIN Estates E ON E.EstateID = J2.EstateID) as J3 " +
-                "LEFT JOIN District D ON D.DistrictID = J3.DistrictID " +
+                             "FROM (SELECT P.*, AMP.fAgentID as AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
+                                    "FROM properties P " +
+                                    "LEFT JOIN agent_manages_property AMP ON AMP.fPropertyID = P.PropertyID) as J1 " +
+                             "LEFT JOIN agents A ON A.AgentID = J1.fAgentID) as J2 " +
+                      "LEFT JOIN estates E ON E.EstateID = J2.fEstateID) as J3 " +
+                "LEFT JOIN districts D ON D.DistrictID = J3.fDistrictID " +
                 "WHERE J3.PropertyID = @p0";
 
             return db.Database.SqlQuery<Property>(query, id).ToList().First();
@@ -53,16 +53,16 @@ namespace SgProperty.DAL
         {
             string query =
                 "SELECT J3.PropertyID, J3.PropertyName, J3.Address, J3.PropertyType, J3.AskingPrice, J3.AgreedPrice, J3.Image, " +
-                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.EstateID, J3.EstateName, J3.DistrictID, D.DistrictName, " +
+                "J3.Latitude, J3.Longitude, J3.ListingType, J3.Size, J3.CountClicked, J3.fEstateID as EstateID, J3.EstateName, J3.fDistrictID as DistrictID, D.DistrictName, " +
                 "J3.AgentID, J3.CompanyName, J3.DatePosted, J3.ExclusiveStartDate, J3.ExpiryDate " +
-                "FROM (SELECT J2.*, E.EstateName, E.DistrictID " +
+                "FROM (SELECT J2.*, E.EstateName, E.fDistrictID " +
                       "FROM (SELECT J1.*, A.CompanyName " +
-                             "FROM (SELECT P.*, AMP.AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
-                                    "FROM Property P " +
-                                    "LEFT JOIN Agent_Manages_Property AMP ON AMP.PropertyID = P.PropertyID) as J1 " +
-                             "LEFT JOIN Agent A ON A.AgentID = J1.AgentID) as J2 " +
-                      "LEFT JOIN Estates E ON E.EstateID = J2.EstateID) as J3 " +
-                "LEFT JOIN District D ON D.DistrictID = J3.DistrictID " +
+                             "FROM (SELECT P.*, AMP.fAgentID as AgentID, AMP.DatePosted, AMP.ExclusiveStartDate, AMP.ExpiryDate " +
+                                    "FROM properties P " +
+                                    "LEFT JOIN agent_manages_property AMP ON AMP.fPropertyID = P.PropertyID) as J1 " +
+                             "LEFT JOIN agents A ON A.AgentID = J1.AgentID) as J2 " +
+                      "LEFT JOIN estates E ON E.EstateID = J2.fEstateID) as J3 " +
+                "LEFT JOIN districts D ON D.DistrictID = J3.fDistrictID " +
                 "WHERE J3.PropertyName LIKE '%"
                 + keyword + "%' OR J3.Address LIKE '%"
                 + keyword + "%' OR J3.PropertyType LIKE '%"
@@ -80,35 +80,35 @@ namespace SgProperty.DAL
         public IEnumerable<string> GetAllEstateNameInDistrict(int? districtID)
         {
             if (districtID == null)     //Retrieve EstateNames for all Districts
-                return db.Database.SqlQuery<string>("SELECT DISTINCT EstateName FROM Estates", "").ToList();
+                return db.Database.SqlQuery<string>("SELECT DISTINCT EstateName FROM estates", "").ToList();
             else
                 return null;
         }
 
         public IEnumerable<int> GetDistrictIdByDistrictName(string districtName)
         {
-            return db.Database.SqlQuery<int>("SELECT DistrictID FROM District WHERE DistrictName = @p0", districtName);
+            return db.Database.SqlQuery<int>("SELECT DistrictID FROM districts WHERE DistrictName = @p0", districtName);
         }
 
         public IEnumerable<string> GetAllDistrictName()
         {
-            return db.Database.SqlQuery<string>("SELECT DistrictName FROM District", "").ToList();
+            return db.Database.SqlQuery<string>("SELECT DistrictName FROM districts", "").ToList();
         }
 
         public IEnumerable<string> GetAllPropertyTypes()
         {
-            return db.Database.SqlQuery<string>("SELECT DISTINCT PropertyType FROM Property ORDER BY PropertyType ASC");
+            return db.Database.SqlQuery<string>("SELECT DISTINCT PropertyType FROM properties ORDER BY PropertyType ASC");
         }
 
         public IEnumerable<string> GetAllListingTypes()
         {
-            return db.Database.SqlQuery<string>("SELECT DISTINCT ListingType FROM Property ORDER BY ListingType ASC");
+            return db.Database.SqlQuery<string>("SELECT DISTINCT ListingType FROM properties ORDER BY ListingType ASC");
         }
 
         public void IncrementCountClickedForPropertyID(int? propertyID)
         {
             if (propertyID != null)
-                db.Database.ExecuteSqlCommand("UPDATE Property SET CountClicked = CountClicked + 1 WHERE PropertyID = @p0", propertyID);
+                db.Database.ExecuteSqlCommand("UPDATE properties SET CountClicked = CountClicked + 1 WHERE PropertyID = @p0", propertyID);
         }
     }
 }

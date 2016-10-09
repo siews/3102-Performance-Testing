@@ -13,17 +13,17 @@ namespace SgProperty.DAL
 
         public IEnumerable<PopularityStatistic> GetPopularityStatistic()
         {
-            string query = "SELECT PropertyType, CountClicked FROM Property ORDER BY PropertyType";
+            string query = "SELECT PropertyType, CountClicked FROM properties ORDER BY PropertyType";
             return db.Database.SqlQuery<PopularityStatistic>(query).ToList();
         }
 
         public IEnumerable<PopulationStatistic> GetPopulationStatistic()
         {
-            string populationStatisticQuery = "SELECT District.DistrictName, Estates.EstateName, Population.TotalPopulation " +
-                                                "FROM POPULATION " +
-                                                "INNER JOIN Estates ON Population.EstateID = Estates.EstateID " +
-                                                "INNER JOIN District ON Estates.DistrictID = District.DistrictID " +
-                                                "ORDER BY District.DistrictName ASC";
+            string populationStatisticQuery = "SELECT districts.DistrictName, estates.EstateName, populations.TotalPopulation " +
+                                                "FROM populations " +
+                                                "INNER JOIN estates ON populations.PopulationID = estates.fPopulationID " +
+                                                "INNER JOIN districts ON estates.fDistrictID = districts.DistrictID " +
+                                                "ORDER BY districts.DistrictName ASC";
 
             return db.Database.SqlQuery<PopulationStatistic>(populationStatisticQuery).ToList();
         }

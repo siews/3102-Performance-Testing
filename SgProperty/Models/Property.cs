@@ -15,6 +15,26 @@ namespace SgProperty.Models
         [Key]
         public int PropertyID { get; set; }
 
+        //public string PropertyName { get; set; }
+        //public string Address { get; set; }
+        //public string PropertyType { get; set; }
+        //public double AskingPrice { get; set; }
+        //public double AgreedPrice { get; set; }
+        //public string Image { get; set; }
+        //public double Latitude { get; set; }
+        //public double Longitude { get; set; }
+        //public string ListingType { get; set; }
+        //public double Size { get; set; }
+        //public int CountClicked { get; set; }
+
+        //[ForeignKey("EstateID")]
+        //public int fEstateID { get; set; }
+        //[ForeignKey("AgentID")]
+        //public int fAgentID { get; set; }
+
+        //public virtual Estates EstateID { get; set; }
+        //public virtual Agent AgentID { get; set; }
+
         public string PropertyName { get; set; }
         public string Address { get; set; }
         public string PropertyType { get; set; }
@@ -26,14 +46,15 @@ namespace SgProperty.Models
         public string ListingType { get; set; }
         public double Size { get; set; }
         public int CountClicked { get; set; }
+        public int EstateID { get; set; }
+        public string EstateName { get; set; }
+        public int DistrictID { get; set; }
+        public string DistrictName { get; set; }
+        public int AgentID { get; set; }
+        public string CompanyName { get; set; }
+        public string DatePosted { get; set; }
+        public string ExclusiveStartDate { get; set; }
+        public string ExpiryDate { get; set; }
 
-        [ForeignKey("EstateID")]
-        public int fEstateID { get; set; }
-        [ForeignKey("AgentID")]
-        public int fAgentID { get; set; }
-
-        public virtual Estates EstateID { get; set; }
-        public virtual Agent AgentID { get; set; }
-        
     }
 }
