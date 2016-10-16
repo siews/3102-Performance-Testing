@@ -214,12 +214,12 @@
     <Compile Include="Migrations\MySqlInitializer.cs" />
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\Agent_Manages_Property.cs" />
+    <Compile Include="Models\Average.cs" />
+    <Compile Include="Models\AverageViewModel.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\Dropdownlist.cs" />
     <Compile Include="Models\Estates.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Modek1.cs" />
-    <Compile Include="Models\Model2.cs" />
     <Compile Include="Models\PopularityStatistic.cs" />
     <Compile Include="Models\Population.cs" />
     <Compile Include="Models\PopulationStatistic.cs" />
@@ -280,6 +280,7 @@
     <Content Include="Views\Property\Listing.cshtml" />
     <Content Include="Views\Property\Compare.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
+    <Content Include="Views\Property\Average.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,51 @@
+﻿@model SgProperty.Models.AverageViewModel
+
+@{
+    ViewBag.Title = "Properties' Average Asking Prices ";
+}
+<style>
+    table.one {
+        float: left;
+        width: 45%;
+    }
+
+    table.two {
+        float: right;
+        width: 45%;
+    }
+    td, th{
+        text-align:center;
+    }
+</style>
+<h2>Properties' Average Asking Prices </h2>
+<div style="padding-top:10px; padding-bottom:150px;">
+    <table class="table one">
+        <tr>
+            <th>Property Types</th>
+            <th>Average asking price</th>
+        </tr>
+
+        @foreach (var item in Model.propertyTypesAverages)
+        {
+            <tr>
+                <td>@item.criteriaName</td>
+                <td>@item.criteriaAverage</td>
+            </tr>
+        }
+    </table>
+
+    <table class="table two">
+        <tr>
+            <th>Districts</th>
+            <th>Average asking price</th>
+        </tr>
+
+        @foreach (var item in Model.districtAverages)
+        {
+            <tr>
+                <td>@item.criteriaName</td>
+                <td>@item.criteriaAverage</td>
+            </tr>
+        }
+    </table>
+</div>

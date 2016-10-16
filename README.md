@@ -1,4 +1,6 @@
-# ict2106proj
+# ICT3102 Project 
+
+#Remember to change to your password at the SGproperty connection string inside Web.config
 
 ### Add the following lines to the git exlude file in directory `~.git/info/exlude` to prevent uploading/downloading of user preferences:
 ```

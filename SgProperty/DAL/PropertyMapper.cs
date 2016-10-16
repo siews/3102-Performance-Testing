@@ -110,5 +110,6 @@ namespace SgProperty.DAL
             if (propertyID != null)
                 db.Database.ExecuteSqlCommand("UPDATE properties SET CountClicked = CountClicked + 1 WHERE PropertyID = @p0", propertyID);
         }
+
     }
 }

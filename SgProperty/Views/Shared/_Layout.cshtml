@@ -33,6 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Property Listing", "Index", "Property")</li>
+                    <li>@Html.ActionLink("Average Prices", "Average", "Property")</li>
                     <li>@Html.ActionLink("Statistics", "Index", "Statistic")</li>
                 </ul>
             </div>
@@ -40,12 +41,11 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p class="text-center">&copy; @DateTime.Now.Year - SG Property</p>
-        </footer>
     </div>
-
+    <footer>
+        <hr />
+        <p class="text-center" style="color:#dd4814;">&copy; @DateTime.Now.Year - SG Property</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

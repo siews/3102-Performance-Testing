@@ -88,7 +88,7 @@ namespace SgProperty.Controllers
             // Filtering logic
             if (!DistrictDropDownList.Equals(defaultListOption))
             {
-                //properties = properties.Where(p => p.DistrictID.Equals(propertyMapper.GetDistrictIdByDistrictName(DistrictDropDownList).First()));
+                properties = properties.Where(p => p.DistrictID.Equals(propertyMapper.GetDistrictIdByDistrictName(DistrictDropDownList).First()));
             }
 
             if (!PropertyTypeDropDownList.Equals(defaultListOption))
@@ -140,6 +140,12 @@ namespace SgProperty.Controllers
             // Increment ClickCount
             propertyMapper.IncrementCountClickedForPropertyID(id);
             return View(property);
+        }
+
+        // GET: Property/Average
+        public ActionResult Average()
+        {
+            return View(getAveragePrices());
         }
 
         public String Comparison()
@@ -289,5 +295,84 @@ namespace SgProperty.Controllers
                 Session["compare2"] = compare2;
             }
         }
+
+        /*Function to create AverageViewModels: each criteria with a specific average asking price calculated
+        * Calculate average for each district and property type
+        * Each will be a AverageViewModel e.g. [Condominium, 1503.15]
+        * Then display all AverageViewModels in a page with a table
+        */
+        private AverageViewModel getAveragePrices()
+        {
+            //TODO Logic
+            //Declare empty list
+            Stopwatch myStopWatch = Stopwatch.StartNew();
+            List<Average> typeCriteria = new List<Average>();
+            List<Average> districtCriteria = new List<Average>();
+            IEnumerable<Property> propertiesByCriteria; //To later load list of properties for each different criteria
+
+            //Get list of all properties first
+            IEnumerable<Property> fullList = propertyMapper.SelectAll();
+            //Get all property types
+            IEnumerable<string> allPropertyTypes = propertyMapper.GetAllPropertyTypes();
+            //Get all district names
+            IEnumerable<string> allDistricts = propertyMapper.GetAllDistrictName();
+
+            //filter the full list by each property type, and then find its average and add as new AverageViewModel
+            foreach (string type in allPropertyTypes)
+            {
+                propertiesByCriteria = fullList.Where(p => p.PropertyType.Equals(type));
+                //If there are properties for this criteria  
+                if (propertiesByCriteria.Any())
+                {
+                    double totalSum = 0;
+                    int count = 0;
+                    //Nested For-loop to get total sum of all properties for this criteria
+                    foreach (Property ppt in propertiesByCriteria)
+                    {
+                        totalSum = totalSum + ppt.AskingPrice;
+                        count++;
+                    }
+                    //Add the criteria and its average as a new AverageViewModel
+                    Average avg = new Average();
+                    avg.criteriaAverage = totalSum / count;
+                    avg.criteriaName = type;
+                    typeCriteria.Add(avg);
+                    //System.Diagnostics.Debug.WriteLine(avm.criteriaAverage + " - " + avm.criteriaName);
+                }
+            }
+            //foreach district, find its average and add as new AverageViewModel
+            foreach (string district in allDistricts)
+            {
+                propertiesByCriteria = fullList.Where(p => p.DistrictID.Equals(propertyMapper.GetDistrictIdByDistrictName(district).First()));
+                if (propertiesByCriteria.Any())
+                {
+                    double totalSum = 0;
+                    int count = 0;
+                    //Nested For-loop to get total sum of all properties for this criteria
+                    foreach (Property ppt in propertiesByCriteria)
+                    {
+                        totalSum = totalSum + ppt.AskingPrice;
+                        count++;
+                    }
+                    //Add the criteria and its average as a new AverageViewModel
+                    Average avg = new Average();
+                    avg.criteriaAverage = totalSum / count;
+                    avg.criteriaName = district;
+                    districtCriteria.Add(avg);
+                    //System.Diagnostics.Debug.Write(avm.criteriaAverage + " - " + avm.criteriaName);
+                }
+            }
+            if (districtCriteria.Any() && typeCriteria.Any())
+            {
+                //Put the two loaded lists from above into a AverageViewModel for display
+                AverageViewModel avm = new AverageViewModel();
+                avm.districtAverages = districtCriteria;
+                avm.propertyTypesAverages = typeCriteria;
+                System.Diagnostics.Debug.WriteLine("Time taken (ms) : " + myStopWatch.ElapsedMilliseconds);
+                return avm;
+            }
+            return null;
+        }
+
     }
 }
